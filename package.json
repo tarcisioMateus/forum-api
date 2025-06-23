@@ -1,0 +1,29 @@
+{
+  "name": "forum",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarcisioMateus/forum-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarcisioMateus/forum-api/issues"
+  },
+  "homepage": "https://github.com/tarcisioMateus/forum-api#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "typescript": "^5.8.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
+  }
+}
