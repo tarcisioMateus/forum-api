@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,10 @@
   "homepage": "https://github.com/tarcisioMateus/forum-api#readme",
   "description": "",
   "devDependencies": {
+    "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^24.0.3",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vitest-globals": "^1.5.0",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"

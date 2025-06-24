@@ -15,7 +15,6 @@ interface QuestionProps {
 }
 
 export class Question extends Entity<QuestionProps> {
-
   get authorId() {
     return this.props.authorId
   }
@@ -49,10 +48,7 @@ export class Question extends Entity<QuestionProps> {
   }
 
   get excerpt() {
-    return this.content
-      .substring(0, 120)
-      .trimEnd()
-      .concat('...')
+    return this.content.substring(0, 120).trimEnd().concat('...')
   }
 
   private touch() {
@@ -79,11 +75,14 @@ export class Question extends Entity<QuestionProps> {
     props: Optional<QuestionProps, 'createdAt' | 'slug'>,
     id?: UniqueEntityID,
   ) {
-    const question = new Question({
-      ...props,
-      slug: props.slug ?? Slug.createFromText(props.title),
-      createdAt: new Date(),
-    }, id)
+    const question = new Question(
+      {
+        ...props,
+        slug: props.slug ?? Slug.createFromText(props.title),
+        createdAt: new Date(),
+      },
+      id,
+    )
 
     return question
   }
