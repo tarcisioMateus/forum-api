@@ -20,6 +20,7 @@
   "homepage": "https://github.com/tarcisioMateus/forum-api#readme",
   "description": "",
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^24.0.3",
     "eslint": "^8.57.1",
