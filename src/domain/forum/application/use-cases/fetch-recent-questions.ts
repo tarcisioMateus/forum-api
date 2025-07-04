@@ -3,6 +3,7 @@ import { QuestionsRepository } from '../repositories/questions-repository'
 import {
   PaginationParams,
   DEFAULT_PER_PAGE,
+  DEFAULT_PAGE,
 } from '@/core/repositories/pagination-params'
 
 interface FetchRecentQuestionsUseCaseRequest extends PaginationParams {}
@@ -15,7 +16,7 @@ export class FetchRecentQuestionsUseCase {
   constructor(private questionsRepository: QuestionsRepository) {}
 
   async execute({
-    page = 1,
+    page = DEFAULT_PAGE,
     perPage = DEFAULT_PER_PAGE,
   }: Partial<FetchRecentQuestionsUseCaseRequest>): Promise<FetchRecentQuestionsUseCaseResponse> {
     const questions = await this.questionsRepository.fetchManyRecent({
@@ -23,8 +24,8 @@ export class FetchRecentQuestionsUseCase {
       perPage,
     })
 
-    if (!questions) {
-      throw new Error('Question not found.')
+    if (!questions.length) {
+      throw new Error('No Question found.')
     }
 
     return {
