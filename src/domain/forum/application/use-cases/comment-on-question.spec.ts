@@ -1,0 +1,34 @@
+import { makeQuestion } from 'test/factories/make-question'
+import { CommentOnQuestionUseCase } from './comment-on-question'
+import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-question-comments-repository'
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
+
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository
+let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository
+let sut: CommentOnQuestionUseCase
+
+describe('Comment on Question', () => {
+  beforeEach(() => {
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
+    inMemoryQuestionCommentsRepository =
+      new InMemoryQuestionCommentsRepository()
+    sut = new CommentOnQuestionUseCase(
+      inMemoryQuestionsRepository,
+      inMemoryQuestionCommentsRepository,
+    )
+  })
+
+  it('should be able to create an question comment', async () => {
+    const question = makeQuestion()
+
+    inMemoryQuestionsRepository.create(question)
+
+    const { questionComment } = await sut.execute({
+      questionId: question.id.toString(),
+      authorId: '1',
+      content: 'New comment',
+    })
+
+    expect(questionComment.content).toEqual('New comment')
+  })
+})
