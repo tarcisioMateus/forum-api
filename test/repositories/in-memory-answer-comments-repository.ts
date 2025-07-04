@@ -1,3 +1,4 @@
+import { PaginationParams } from '@/core/repositories/pagination-params'
 import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository'
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
 
@@ -14,6 +15,17 @@ export class InMemoryAnswerCommentsRepository
     }
 
     return answerComment
+  }
+
+  async findManyByAnswerId(
+    answerId: string,
+    { page, perPage }: PaginationParams,
+  ): Promise<AnswerComment[]> {
+    const answerComments = this.items
+      .filter((item) => item.answerId.toString() === answerId)
+      .splice((page - 1) * perPage, page * perPage)
+
+    return answerComments
   }
 
   async create(answerComment: AnswerComment) {
