@@ -10,12 +10,17 @@ describe('Answer Question', () => {
     sut = new AnswerQuestionUseCase(inMemoryAnswersRepository)
   })
   it('should be able to create an answer', async () => {
-    const { answer } = await sut.execute({
+    const response = await sut.execute({
       questionId: '1',
       instructorId: '1',
       content: 'New answer',
     })
 
-    expect(answer.content).toEqual('New answer')
+    expect(response.isRight()).toBeTruthy()
+    expect(response.value).toEqual(
+      expect.objectContaining({
+        answer: expect.objectContaining({ content: 'New answer' }),
+      }),
+    )
   })
 })

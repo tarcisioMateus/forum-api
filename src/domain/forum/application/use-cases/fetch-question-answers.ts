@@ -6,14 +6,19 @@ import {
   DEFAULT_PAGE,
 } from '@/core/repositories/pagination-params'
 import { Optional } from '@/core/types/optional'
+import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface FetchQuestionAnswersUseCaseRequest extends PaginationParams {
   questionId: string
 }
 
-interface FetchQuestionAnswersUseCaseResponse {
-  answers: Answer[]
-}
+type FetchQuestionAnswersUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    answers: Answer[]
+  }
+>
 
 export class FetchQuestionAnswersUseCase {
   constructor(private answersRepository: AnswersRepository) {}
@@ -32,11 +37,11 @@ export class FetchQuestionAnswersUseCase {
     )
 
     if (!answers.length) {
-      throw new Error('No Answer found.')
+      return left(new ResourceNotFoundError())
     }
 
-    return {
+    return right({
       answers,
-    }
+    })
   }
 }

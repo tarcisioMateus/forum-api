@@ -22,12 +22,17 @@ describe('Comment on Answer', () => {
 
     inMemoryAnswersRepository.create(answer)
 
-    const { answerComment } = await sut.execute({
+    const response = await sut.execute({
       answerId: answer.id.toString(),
       authorId: '1',
       content: 'New comment',
     })
 
-    expect(answerComment.content).toEqual('New comment')
+    expect(response.isRight()).toBeTruthy()
+    expect(response.value).toEqual(
+      expect.objectContaining({
+        answerComment: expect.objectContaining({ content: 'New comment' }),
+      }),
+    )
   })
 })

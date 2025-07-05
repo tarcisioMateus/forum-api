@@ -18,17 +18,20 @@ describe('Fetch Recent Questions', () => {
       )
     }
 
-    const { questions } = await sut.execute({ page: 1 })
+    const response = await sut.execute({ page: 1 })
 
-    expect(questions[0]).toEqual(
-      expect.objectContaining({ createdAt: new Date(2025, 6, 22) }),
-    )
-    expect(questions[1]).toEqual(
-      expect.objectContaining({ createdAt: new Date(2025, 6, 21) }),
-    )
-    expect(questions[2]).toEqual(
-      expect.objectContaining({ createdAt: new Date(2025, 6, 20) }),
-    )
+    expect(response.isRight()).toBeTruthy()
+    if (response.isRight()) {
+      expect(response.value.questions[0]).toEqual(
+        expect.objectContaining({ createdAt: new Date(2025, 6, 22) }),
+      )
+      expect(response.value.questions[1]).toEqual(
+        expect.objectContaining({ createdAt: new Date(2025, 6, 21) }),
+      )
+      expect(response.value.questions[2]).toEqual(
+        expect.objectContaining({ createdAt: new Date(2025, 6, 20) }),
+      )
+    }
   })
 
   it('should be able to fetch paginated questions', async () => {
@@ -38,14 +41,17 @@ describe('Fetch Recent Questions', () => {
       )
     }
 
-    const { questions } = await sut.execute({ page: 2 })
+    const response = await sut.execute({ page: 2 })
 
-    expect(questions).toHaveLength(2)
-    expect(questions[0]).toEqual(
-      expect.objectContaining({ createdAt: new Date(2025, 6, 2) }),
-    )
-    expect(questions[1]).toEqual(
-      expect.objectContaining({ createdAt: new Date(2025, 6, 1) }),
-    )
+    expect(response.isRight()).toBeTruthy()
+    if (response.isRight()) {
+      expect(response.value.questions).toHaveLength(2)
+      expect(response.value.questions[0]).toEqual(
+        expect.objectContaining({ createdAt: new Date(2025, 6, 2) }),
+      )
+      expect(response.value.questions[1]).toEqual(
+        expect.objectContaining({ createdAt: new Date(2025, 6, 1) }),
+      )
+    }
   })
 })

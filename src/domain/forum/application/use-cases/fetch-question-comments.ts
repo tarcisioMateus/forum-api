@@ -6,14 +6,19 @@ import {
 } from '@/core/repositories/pagination-params'
 import { Optional } from '@/core/types/optional'
 import { QuestionComment } from '../../enterprise/entities/question-comment'
+import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface FetchQuestionCommentsUseCaseRequest extends PaginationParams {
   questionId: string
 }
 
-interface FetchQuestionCommentsUseCaseResponse {
-  questionComments: QuestionComment[]
-}
+type FetchQuestionCommentsUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    questionComments: QuestionComment[]
+  }
+>
 
 export class FetchQuestionCommentsUseCase {
   constructor(private questionCommentsRepository: QuestionCommentsRepository) {}
@@ -33,11 +38,11 @@ export class FetchQuestionCommentsUseCase {
       })
 
     if (!questionComments.length) {
-      throw new Error('No Comment found.')
+      return left(new ResourceNotFoundError())
     }
 
-    return {
+    return right({
       questionComments,
-    }
+    })
   }
 }
