@@ -44,7 +44,7 @@ export class EditQuestionUseCase {
     }
 
     const currentAttachments =
-      await this.questionAttachmentsRepository.findByQuestionId(questionId)
+      await this.questionAttachmentsRepository.findManyByQuestionId(questionId)
     question.attachments = new QuestionAttachmentList(currentAttachments)
 
     const updatedAttachments = attachmentsId.map((attachmentId) =>

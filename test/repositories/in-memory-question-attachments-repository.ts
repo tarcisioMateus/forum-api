@@ -7,7 +7,9 @@ export class InMemoryQuestionAttachmentsRepository
 {
   public items: QuestionAttachment[] = []
 
-  async findByQuestionId(questionId: string): Promise<QuestionAttachment[]> {
+  async findManyByQuestionId(
+    questionId: string,
+  ): Promise<QuestionAttachment[]> {
     const attachment = this.items.filter(
       (item) => item.questionId.toString() === questionId,
     )
