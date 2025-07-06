@@ -7,7 +7,7 @@ import {
 } from '@/core/repositories/pagination-params'
 import { Optional } from '@/core/types/optional'
 import { Either, left, right } from '@/core/either'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 
 interface FetchQuestionAnswersUseCaseRequest extends PaginationParams {
   questionId: string
