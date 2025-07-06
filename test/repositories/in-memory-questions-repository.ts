@@ -47,7 +47,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 
   async create(question: Question) {
     this.items.push(question)
-    this.questionAttachmentsRepository.create(question.attachments.currentItems)
+    this.questionAttachmentsRepository.create(question.attachments.getItems())
   }
 
   async save(question: Question): Promise<void> {
@@ -56,6 +56,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     )
 
     this.items[questionIndex] = question
+    this.questionAttachmentsRepository.save(question.attachments)
   }
 
   async delete(question: Question): Promise<void> {
