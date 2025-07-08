@@ -59,7 +59,8 @@ describe('On Answer Created', () => {
     await inMemoryQuestionsRepository.create(question)
     await inMemoryAnswersRepository.create(answer)
 
-    await vi.waitFor(() => {})
-    expect(onSendNotificationExecuteSpy).toHaveBeenCalled()
+    await vi.waitFor(() => {
+      expect(onSendNotificationExecuteSpy).toHaveBeenCalled()
+    })
   })
 })
