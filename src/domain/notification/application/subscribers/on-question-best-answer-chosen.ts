@@ -33,6 +33,7 @@ export class OnQuestionBestAnswerChosen implements EventHandler {
         title: `Your Answer was chosen!`,
         content: `Your answer on: "${question.title.substring(40).concat('...')}"`,
       })
+      console.log(`bestAnswerID: "${bestAnswerId.toString()}"`)
     }
   }
 }

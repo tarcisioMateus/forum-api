@@ -32,6 +32,7 @@ export class OnAnswerCreated implements EventHandler {
         title: `New Answer on: "${question.title.substring(40).concat('...')}"`,
         content: answer.excerpt,
       })
+      console.log(`AnswerID: "${answer.id.toString()}"`)
     }
   }
 }
