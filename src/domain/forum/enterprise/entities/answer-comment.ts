@@ -24,8 +24,8 @@ export class AnswerComment extends Comment<AnswerCommentProps> {
       id,
     )
 
-    const isNewAnswer = !id
-    if (isNewAnswer) {
+    const isNew = !id
+    if (isNew) {
       answerComment.addDomainEvent(new AnswerCommentCreatedEvent(answerComment))
     }
 
