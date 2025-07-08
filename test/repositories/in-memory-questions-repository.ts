@@ -1,3 +1,4 @@
+import { DomainEvents } from '@/core/events/domain-events'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
@@ -57,6 +58,8 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 
     this.items[questionIndex] = question
     this.questionAttachmentsRepository.save(question.attachments)
+
+    DomainEvents.dispatchEventsForAggregate(question.id)
   }
 
   async delete(question: Question): Promise<void> {
