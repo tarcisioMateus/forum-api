@@ -52,7 +52,7 @@ describe('On Question Best Answer chosen', () => {
     )
   })
 
-  it('should be able to send a notification', async () => {
+  it('should be able to send a notification ', async () => {
     const question = makeQuestion()
     const answer = makeAnswer({ questionId: question.id })
 
